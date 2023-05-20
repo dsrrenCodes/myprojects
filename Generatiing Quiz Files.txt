@@ -1,0 +1,42 @@
+import random
+
+capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
+'Arkansas': 'Little Rock', 'California': 'Sacramento', 'Colorado': 'Denver',
+'Connecticut': 'Hartford', 'Delaware': 'Dover', 'Florida': 'Tallahassee',
+'Georgia': 'Atlanta', 'Hawaii': 'Honolulu', 'Idaho': 'Boise', 'Illinois':
+'Springfield', 'Indiana': 'Indianapolis', 'Iowa': 'Des Moines', 'Kansas':
+'Topeka', 'Kentucky': 'Frankfort', 'Louisiana': 'Baton Rouge', 'Maine':
+'Augusta', 'Maryland': 'Annapolis', 'Massachusetts': 'Boston', 'Michigan':
+'Lansing', 'Minnesota': 'Saint Paul', 'Mississippi': 'Jackson', 'Missouri':
+'Jefferson City', 'Montana': 'Helena', 'Nebraska': 'Lincoln', 'Nevada':
+'Carson City', 'New Hampshire': 'Concord', 'New Jersey': 'Trenton', 'New Mexico': 'Santa Fe',
+'New York': 'Albany', 'North Carolina': 'Raleigh',
+'North Dakota': 'Bismarck', 'Ohio': 'Columbus', 'Oklahoma': 'Oklahoma City',
+'Oregon': 'Salem', 'Pennsylvania': 'Harrisburg', 'Rhode Island': 'Providence',
+'South Carolina': 'Columbia', 'South Dakota': 'Pierre', 'Tennessee':
+'Nashville', 'Texas': 'Austin', 'Utah': 'Salt Lake City', 'Vermont':
+'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 'West Virginia':
+'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
+
+for quiznum in range(10):
+    QuizFile=open(f"Capital Quiz#{quiznum+1}","w")
+    AnsFile=open(f"Capital Ans#{quiznum+1}","w")
+    QuizFile.write(f"Name: \nClass: \nDate: \n\n\nWelcome To #{quiznum+1}\n")
+    AnsFile.write(f"Answers for #{quiznum+1}\n\n")
+    states=(list(capitals.keys()))
+    random.shuffle(states)
+    for questionNumber in range(50):
+        correctAnswer= capitals[states[questionNumber]]
+        wrongAnswer=list(capitals.values())
+        del wrongAnswer[wrongAnswer.index(correctAnswer)]
+        wrongAnswers=random.sample(wrongAnswer,3)
+        answerOptions=wrongAnswers+ [correctAnswer]
+        random.shuffle(answerOptions)
+        QuizFile.write(f'#{questionNumber + 1}.What is the capital of {states[questionNumber]}?\n')
+        for i in range(4):
+            QuizFile.write(f"{'ABCD'[i]}.{answerOptions[i]}")
+            QuizFile.write("\n")
+        QuizFile.write("YOUR ANSWER: \n")
+        AnsFile.write('%s. %s \n' %(questionNumber+1, 'ABCD'[answerOptions.index(correctAnswer)]))
+QuizFile.close()
+AnsFile.close()
